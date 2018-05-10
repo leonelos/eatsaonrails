@@ -7,5 +7,7 @@ Rails.application.routes.draw do
 
   resources :companies
 
+  #resources :persons
+
   root 'welcome#index'
 end
