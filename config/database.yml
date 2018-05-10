@@ -107,5 +107,5 @@ test:
 production:
   <<: *default
   database: eatsa
-  username: myapp
+  username: postgres
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
