@@ -11,6 +11,8 @@ module Enterprise
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
+    config.DATABASE_URL = "mysql://bc4785eaf284e9:16cf2fa7@us-cdbr-iron-east-04.cleardb.net/heroku_6b4aefadd3f8873?reconnect=true"
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
