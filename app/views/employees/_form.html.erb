@@ -1,0 +1,54 @@
+<%= form_for @employee do |form| %>
+	<% if @employee.errors.any? %>
+    	<div id="error_explanation">
+      		<h2>
+        		<%= pluralize(@employee.errors.count, "error") %> The registered employee cannot be saved:
+      		</h2>
+      		<ul>
+        		<% @employee.errors.full_messages.each do |msg| %>
+          			<li><%= msg %></li>
+        		<% end %>
+        		<!--
+        		<%= messages = @employee.errors.details.keys.map { |attr|  content_tag(:li, @employee.errors.full_messages_for(attr).first)}.join %>
+        		-->
+      		</ul>
+    	</div>
+  	<% end %>
+	<p>
+		<%= form.label :name %><br>
+		<%= form.text_field :name%>
+	</p>
+	<p>
+		<%= form.label :lastname %><br>
+		<%= form.text_field :lastname%>
+	</p>
+	<p>
+		<%= form.label :dni %><br>
+		<%= form.text_field :dni %>
+	</p>
+	<p>
+		<%= form.label :age %><br>
+		<%= form.number_field :age %>
+	</p>
+	<p>
+		<%= form.label :birthday %><br>
+		<%= form.date_field :birthday %>
+	</p>
+	<p>
+		<%= form.label :address %><br>
+		<%= form.text_field :address %>
+	</p>
+	<p>
+		<%= form.label :company %><br />
+  		<%= form.select :company_id, options_for_select(Company.all.map{|s|[s.name, s.id]}) %>
+	</p>
+	<p>
+		<%= form.label :role %><br />
+  		<%= form.select :role_id, options_for_select(Role.all.map{|s|[s.name, s.id]}) %>
+	</p>
+	<p>
+		<%= form.submit %>
+	</p>
+<% end %>
+
+<%= link_to 'Back', employees_path %>

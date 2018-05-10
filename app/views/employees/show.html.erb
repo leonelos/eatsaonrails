@@ -1,0 +1,42 @@
+<h1>Employee Information</h1>
+<p>
+  <strong>Name:</strong>
+  <%= @employee.name %>
+</p>
+ 
+<p>
+  <strong>Last Name:</strong>
+  <%= @employee.lastname %>
+</p>
+
+<p>
+  <strong>DNI:</strong>
+  <%= @employee.dni %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @employee.age %>
+</p>
+
+<p>
+  <strong>Birthday:</strong>
+  <%= @employee.birthday %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @employee.address %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @employee.company.name %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @employee.role.name %>
+</p>
+
+<%= link_to 'Listing Employees', employees_path %>
