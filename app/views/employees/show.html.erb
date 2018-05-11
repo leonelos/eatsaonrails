@@ -31,12 +31,16 @@
 
 <p>
   <strong>Company:</strong>
-  <%= @employee.company.name %>
+  <% if @employee.company.present?  %>
+    <%= @employee.company.name %>
+  <% end %>
 </p>
 
 <p>
   <strong>Role:</strong>
-  <%= @employee.role.name %>
+  <% if @employee.role.present?  %>
+    <%= @employee.role.name %>
+  <% end  %>
 </p>
 
 <%= link_to 'Listing Employees', employees_path %>

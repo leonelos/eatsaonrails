@@ -40,11 +40,11 @@
 	</p>
 	<p>
 		<%= form.label :company %><br />
-  		<%= form.select :company_id, options_for_select(Company.all.map{|s|[s.name, s.id]}) %>
+  		<%= form.select :company_id, options_for_select(Company.all.map{|s|[s.name, s.id]}.insert(0, "")) %>
 	</p>
 	<p>
 		<%= form.label :role %><br />
-  		<%= form.select :role_id, options_for_select(Role.all.map{|s|[s.name, s.id]}) %>
+  		<%= form.select :role_id, options_for_select(Role.all.map{|s|[s.name, s.id]}.insert(0, "")) %>
 	</p>
 	<p>
 		<%= form.submit %>
