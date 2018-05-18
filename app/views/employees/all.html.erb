@@ -1,0 +1,107 @@
+<%= javascript_pack_tag 'application' %>
+
+<h1>Listing employees</h1>
+ 
+<!--
+<%= select_tag('company', options_from_collection_for_select(Company.all, 'id', 'name'), prompt: "Select a Company", id: "company") %>
+<%= select_tag('role', options_from_collection_for_select(Role.all, 'id', 'name'), prompt: "Select a Role", id: "role") %>
+-->
+
+<%= react_component("HelloWorld", { companies: Company.all, roles: Role.all, url: 'employees_table' }) %>
+
+
+<br>
+<table id="employees_table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Lastname</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+
+
+<br>
+<%= link_to 'New Employee', new_employee_path %>
+
+<p><%= link_to 'Main Page', root_path %></p>
+
+<script type="text/javascript">
+	var queryParameters = {}, queryString = location.search.substring(1), re = /([^&=]+)=([^&]*)/g, m;
+	while (m = re.exec(queryString)) {
+    	queryParameters[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+	}
+	$( document ).ready(function() {
+	   
+	});
+
+	var url = "/employees/employees_table?company_param=&role_param=";
+	$("#company").on("change", function(){
+		queryParameters['company'] = $(this).val();
+		//location.search = $.param(queryParameters);
+		arrayUrl = url.split("company_param=");
+		subUrl = arrayUrl[1].split("&");
+		if(subUrl.length == 2){
+			url = arrayUrl[0] + "company_param=" + $(this).val() + "&" + subUrl[1];
+		}else{
+			url = arrayUrl[0] + "company_param=" + $(this).val();
+		}
+		$.ajax({url: url, success: function(data){
+	        console.log(data);
+	    }});	
+	});
+	$("#role").on("change", function(){
+		queryParameters['role'] = $(this).val();
+		//location.search = $.param(queryParameters);
+		arrayUrl = url.split("role_param="); 
+		subUrl = arrayUrl[1].split("&");
+		if(subUrl.length == 2){
+			url = arrayUrl[0] + "role_param=" + $(this).val() + "&" + subUrl[1];
+		}else{
+			url = arrayUrl[0] + "role_param=" + $(this).val();
+		}
+		list();
+	});
+
+
+	function list() {
+		$.ajax({url: url, success: function(data){
+	        employees = data.employees;
+	        $('#employees_table tbody').html("");
+	        console.log(data);
+	        $.each(employees, function(i) {
+	        	$('#employees_table tbody').append(
+	        	 	"<tr>" +
+	        	 		"<td>" + employees[i].name +"</td>" +
+	        	 		"<td>" + employees[i].lastname +"</td>" +
+	        	 		"<td><a href='/employees/" + employees[i].id + "'>Show</a></td>" +
+	        	 		"<td><a href='/employees/" + employees[i].id + "/edit'>Edit</a></td>" + 
+      					"<td><a id=\"employee-" + employees[i].id + "\" '>Delete</a></td>" +
+	        	 	"</tr>"
+	        	 );
+
+	        	 $('#exployee' + employees[i].id).click( function(e) {
+	        	 	e.preventDefault();
+
+	        	 	$.ajax({
+	        	 		method: 'delete',
+	        	 		url: '/employees/' + employees[i].id,
+	        	 		success: function(e) {
+	        	 			console.log(e);
+	        	 			list();
+	        	 		},error: function(e){
+	        	 			console.log('error', e);
+	        	 		}
+	        	 	})
+
+	        	 })	
+	        });
+	    }});	
+	}
+</script>
+
+
+
+
