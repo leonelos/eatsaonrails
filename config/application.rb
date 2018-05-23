@@ -11,7 +11,7 @@ module Enterprise
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
-    config.DATABASE_URL = "mysql://bc4785eaf284e9:16cf2fa7@us-cdbr-iron-east-04.cleardb.net/heroku_6b4aefadd3f8873?reconnect=true"
+    config.DATABASE_URL = "postgres://evmkmqhtjcuxpb:6092f0b6648608b1ca44a98b34e2d0dd87e7f8ddb6a09bd868abbf6168cdf4c4@ec2-50-19-224-165.compute-1.amazonaws.com:5432/d73io98339qhi9"
 
     config.autoload_paths << Rails.root.join('lib') #JSON web token 
 
