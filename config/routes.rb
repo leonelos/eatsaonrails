@@ -28,6 +28,16 @@ Rails.application.routes.draw do
   post   "login",       to: "sessions#create"
   delete "logout",      to: "sessions#destroy"
 
-  post "register",      to: "sessions#register"
+  post "register",      to: "users#register"
+
+  	#if you are under postman you should pass yor json like this 
+  	#{
+	#"user":{
+	#	"name" : "test",
+	#	"email" : "test@test.com",
+	#	"password": "1234",
+	#	"password_confirmation": "1234"
+	#}
+}
 
 end
