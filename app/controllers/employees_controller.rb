@@ -1,6 +1,10 @@
-class EmployeesController < ApplicationController
+class EmployeesController < ApiController
+	before_action :require_token_authentication
+	#before_action :current_user
 	def index
 		@employees = Employee.all
+
+		render json: {status: 200, employees: @employees} 
 	end
 	def new
 		@employee = Employee.new
@@ -11,27 +15,33 @@ class EmployeesController < ApplicationController
 	def create 
 		@employee = Employee.new(employee_params)
 		if @employee.save
-			redirect_to @employee
+			render json: {status: 200}
+			#redirect_to @employee
 		else
-			render 'new'
+			render json: {status: 400, errors: @employee.errors}
+			#render 'new'
 		end
 	end
 	def update 
 		@employee = Employee.find(params[:id])
 		if @employee.update(employee_params) #you can use update_attributes also
-			redirect_to @employee
+			render json: {status: 200}
+			#redirect_to @employee
 		else
-			render 'edit'
+			render json: {status: 400, errors: @employee.errors}
+			#render 'edit'
 		end
 	end
 	def destroy 
 		@employee = Employee.find(params[:id])
 		@employee.destroy
+		render json: {status: 200}
 		#redirect_to employees_path
-		redirect_to request.referrer
+		#redirect_to request.referrer
 	end 
 	def show 
-		@employee = Employee.find(params[:id]) 
+		@employee = Employee.find(params[:id])
+		render json: {status: 200, employee: @employee} 
 	end
 	#----------------------------------CUSTOM------------------------------------#
 	def all

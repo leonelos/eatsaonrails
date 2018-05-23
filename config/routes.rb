@@ -12,7 +12,20 @@ Rails.application.routes.draw do
 
   resources :companies
 
+  resources :accounts
+
   #resources :persons
 
   root 'welcome#index'
+
+
+  #jwt
+  #post 'authenticate', to: 'authentication#authenticate'
+
+  #get 'login', to: 'authentication#login'
+
+  get   "login",       to: "sessions#new"
+  post   "login",       to: "sessions#create"
+  delete "logout",      to: "sessions#destroy"
+
 end

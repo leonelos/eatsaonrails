@@ -8,21 +8,6 @@
 -->
 
 <%= react_component("HelloWorld", { companies: Company.all, roles: Role.all, url: 'employees_table' }) %>
-
-
-<br>
-<table id="employees_table">
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Lastname</th>
-		</tr>
-	</thead>
-	<tbody>
-	</tbody>
-</table>
-
-
 <br>
 <%= link_to 'New Employee', new_employee_path %>
 

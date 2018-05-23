@@ -1,6 +1,8 @@
-class CompaniesController < ApplicationController
+class CompaniesController < ApiController
+	before_action :require_token_authentication
 	def index
 		@companies = Company.all
+		render json: {status: 200, companies: @companies}
 	end
 	def new
 		@company = Company.new
@@ -11,9 +13,11 @@ class CompaniesController < ApplicationController
 	def create 
 		@company = Company.new(company_params)
 		if @company.save
-			redirect_to @company
+			render json: {status: 200}
+			#redirect_to @company
 		else
-			render 'new'
+			render json: {status: 400, errors: @company.errors}
+			#render 'new'
 		end
 	end
 	def update 
@@ -26,16 +30,18 @@ class CompaniesController < ApplicationController
 	end
 	def destroy 
 		@company = Company.find(params[:id])
-		unless @company.destroy
-			flash[:error] ="The Company: #{@company.name} cannot be deleted because it's been referenced"
-		else
-			flash[:error] = "The Company was succesfully deleted" 
-		end 
+		#unless @company.destroy
+		#	flash[:error] ="The Company: #{@company.name} cannot be deleted because it's been referenced"
+		#else
+		#	flash[:error] = "The Company was succesfully deleted" 
+		#end 
 		
-		redirect_to companies_path
+		render json: {status: 200}
+		#redirect_to companies_path
 	end 
 	def show 
 		@company = Company.find(params[:id]) 
+		render json: {status: 200, company: @company} 
 	end
 
 	private

@@ -57,3 +57,9 @@ gem 'coffee-script-source', '1.8.0'
 gem 'webpacker', '~> 3.5' #https://github.com/rails/webpacker
 
 gem 'react-rails' #https://github.com/reactjs/react-rails
+
+gem 'bcrypt', '~> 3.1.7'
+
+gem 'jwt'
+
+gem 'simple_command'
