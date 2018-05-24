@@ -1,5 +1,9 @@
 class EmployeesController < ApiController
 	before_action :require_token_authentication
+	before_action :isSuperAdmin? || 
+				  :isAdmin?, except: [:index, :show] || 
+				  :isEditor?, except: [:index, :show, :update] ||
+				  :isEmployee?, except: [:show] 
 	#before_action :current_user
 	def index
 		@employees = Employee.all

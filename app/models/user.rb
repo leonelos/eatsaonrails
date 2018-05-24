@@ -1,7 +1,13 @@
 class User < ApplicationRecord
+	validates :name, presence: true, length: {minimum: 2, maximum: 15}, format: { with: /\A[a-zA-Z _]*\Z/ }
+	validates :email, presence: true, uniqueness: true
+	#validates :password, presence: true #due to we are working with has_secure_token this is not necessary
+  	#validates :password_confirmation, presence: true
+
+	belongs_to :role, optional: true
 	has_secure_password
 	has_secure_token
-  	
+
   	def self.valid_login?(email, password)
     	user = find_by(email: email)
     	if user && user.authenticate(password)

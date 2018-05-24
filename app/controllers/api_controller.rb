@@ -7,6 +7,30 @@ class ApiController < ActionController::Base
 	    @current_user ||= authenticate_token
 	end
 	  
+	def isSuperAdmin? 
+		unless current_user.role_id == 6
+			render_unauthorized("Access denied") 
+		end
+	end
+
+	def isAdmin? 
+		unless current_user.role_id == 7
+			render_unauthorized("Access denied") 
+		end
+	end
+
+	def isEditor? 
+		unless current_user.role_id == 8
+			render_unauthorized("Access denied") 
+		end
+	end
+
+	def isEmployee? 
+		unless current_user.role_id == 9
+			render_unauthorized("Access denied") 
+		end
+	end
+
 	protected
 	  
 	def render_unauthorized(message)

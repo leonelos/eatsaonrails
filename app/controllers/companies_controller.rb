@@ -1,5 +1,9 @@
 class CompaniesController < ApiController
 	before_action :require_token_authentication
+	before_action :isSuperAdmin? || 
+				  :isAdmin?, except: [:index, :show] || 
+				  :isEditor?, except: [:index, :show, :update] ||
+				  :isEmployee?, except: [] 
 	def index
 		@companies = Company.all
 		render json: {status: 200, companies: @companies}
